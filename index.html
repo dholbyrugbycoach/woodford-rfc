@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title id="page-title">Rugby Playbook</title>
+<meta property="og:title" content="Rugby Forward's Player Guide"/>
+<meta property="og:description" content="Forward Lineouts, Calls, Formations & Set Piece"/>
+<meta property="og:type" content="website"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+
+<!-- ── CONFIG IS LOADED HERE — swap config.js per club ── -->
+<script src="woodford-config.js"></script>
+
+<style>
+/* ── CSS VARIABLES — set from config.js on load ────────────── */
+:root {
+  --gold:    #c9a84c;
+  --accent:  #2ecc7a;
+  --red:     #d94040;
+  --bg:      #0b0f0e;
+  --surface: #111816;
+  --card:    #16201d;
+  --border:  #1f2d28;
+  --text:    #e8ede9;
+  --muted:   #7a8f84;
+  --blue:    #6fa3e8;
+}
+
+/* ── RESET & BASE ────────────────────────────────────────────── */
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+body { background:var(--bg); color:var(--text); font-family:'DM Sans',sans-serif; font-size:15px; line-height:1.6; min-height:100vh; padding-bottom:40px; }
+
+/* ── HEADER ─────────────────────────────────────────────────── */
+header { background:#0b160f; border-bottom:3px solid var(--gold); padding:18px 24px; display:flex; align-items:center; gap:16px; }
+.header-badge { width:44px; height:44px; border-radius:50%; background:var(--gold); display:flex; align-items:center; justify-content:center; font-family:'Bebas Neue',sans-serif; font-size:1.2rem; color:#0b0f0e; flex-shrink:0; }
+header h1 { font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:.07em; color:var(--gold); line-height:1; }
+header p  { font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; color:var(--muted); margin-top:2px; }
+
+/* ── NAV ─────────────────────────────────────────────────────── */
+nav { background:#0c1410; border-bottom:1px solid var(--border); padding:0 16px; display:flex; gap:4px; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+nav::-webkit-scrollbar { display:none; }
+.tab-btn { background:none; border:none; border-bottom:3px solid transparent; color:var(--muted); font-family:'DM Sans',sans-serif; font-size:.78rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; padding:14px 14px 11px; cursor:pointer; white-space:nowrap; transition:all .2s; display:flex; align-items:center; gap:6px; }
+.tab-btn:hover { color:var(--text); }
+.tab-btn.active { color:var(--gold); border-bottom-color:var(--gold); }
+.tab-num { background:var(--border); color:var(--muted); font-family:'Bebas Neue',sans-serif; font-size:.85rem; padding:1px 6px; border-radius:3px; }
+.tab-btn.active .tab-num { background:var(--gold); color:#0b0f0e; }
+
+/* ── MAIN LAYOUT ─────────────────────────────────────────────── */
+main { max-width:960px; margin:0 auto; padding:28px 20px; }
+.section { display:none; animation:fadeUp .3s ease; }
+.section.active { display:block; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── SECTION HEADER ─────────────────────────────────────────── */
+.section-header { margin-bottom:24px; }
+.section-header h2 { font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:.06em; color:var(--text); }
+.section-header .subtitle { font-size:.76rem; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); }
+
+/* ── CARDS & WRAPPERS ───────────────────────────────────────── */
+.diagram-wrapper { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:20px 22px; margin-bottom:18px; }
+.diagram-title { font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:.1em; color:var(--gold); margin-bottom:14px; display:flex; align-items:center; gap:10px; }
+.pill { background:rgba(201,168,76,.12); border:1px solid rgba(201,168,76,.3); color:var(--gold); font-size:.68rem; letter-spacing:.12em; padding:2px 8px; border-radius:3px; }
+.info-alert { background:rgba(201,168,76,.06); border:1px solid rgba(201,168,76,.2); border-radius:6px; padding:12px 16px; font-size:.84rem; color:var(--text); margin-bottom:20px; }
+
+/* ── SQUAD LIST ─────────────────────────────────────────────── */
+.squad-list { display:flex; flex-direction:column; gap:8px; }
+.squad-row { display:flex; align-items:center; gap:14px; padding:10px 14px; background:var(--bg); border:1px solid var(--border); border-radius:6px; }
+.squad-num { flex-shrink:0; width:36px; height:36px; border-radius:50%; background:var(--gold); display:flex; align-items:center; justify-content:center; font-family:'Bebas Neue',sans-serif; font-size:1.1rem; color:#0b0f0e; }
+.squad-num.bench { background:var(--surface); border:1px solid var(--border); color:var(--muted); }
+.squad-name { font-family:'Bebas Neue',sans-serif; font-size:1.05rem; letter-spacing:.07em; color:var(--text); }
+.squad-pos  { font-size:.74rem; color:var(--muted); text-transform:uppercase; letter-spacing:.1em; margin-top:1px; }
+.caller-badge { font-size:.68rem; font-weight:700; letter-spacing:.1em; padding:2px 8px; border-radius:3px; margin-left:6px; }
+.caller-gold  { background:rgba(201,168,76,.15); color:var(--gold); border:1px solid rgba(201,168,76,.3); }
+.caller-green { background:rgba(46,204,122,.12); color:var(--accent); border:1px solid rgba(46,204,122,.25); }
+.caller-blue  { background:rgba(111,163,232,.12); color:var(--blue); border:1px solid rgba(111,163,232,.25); }
+
+/* ── MATCH BANNER ───────────────────────────────────────────── */
+.match-banner { background:var(--card); border:1px solid var(--border); border-left:4px solid var(--gold); border-radius:6px; padding:14px 18px; margin-bottom:18px; display:flex; flex-wrap:wrap; gap:16px; align-items:center; }
+.match-opp  { font-family:'Bebas Neue',sans-serif; font-size:1.4rem; letter-spacing:.08em; color:var(--gold); }
+.match-meta { font-size:.78rem; color:var(--muted); }
+.match-note { font-size:.82rem; color:var(--text); width:100%; padding-top:8px; border-top:1px solid var(--border); margin-top:4px; }
+
+/* ── LINEOUT SELECTOR BUTTONS ───────────────────────────────── */
+.formation-selector { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+.fmtn-btn { background:var(--surface); border:1px solid var(--border); color:var(--muted); font-family:'DM Sans',sans-serif; font-size:.78rem; font-weight:600; letter-spacing:.08em; padding:7px 14px; border-radius:4px; cursor:pointer; transition:all .18s; }
+.fmtn-btn:hover { border-color:var(--gold); color:var(--text); }
+.fmtn-btn.active { background:var(--gold); color:#0b0f0e; border-color:var(--gold); }
+.hungary-lo { display:none; }
+.hungary-lo.active { display:block; }
+.lo-opt-btn { background:var(--card); border:1px solid var(--border); color:var(--muted); font-family:'DM Sans',sans-serif; font-size:.72rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; padding:6px 14px; border-radius:4px; cursor:pointer; transition:all .2s; }
+.lo-opt-btn:hover { border-color:var(--gold); color:var(--text); }
+.lo-opt-btn.active { background:var(--gold); color:#0b0f0e; border-color:var(--gold); }
+.lo-option { display:none; }
+.lo-option.active { display:block; }
+
+/* ── PRINCIPLES ─────────────────────────────────────────────── */
+.principles-flow { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; align-items:center; }
+.flow-step { background:var(--card); border:1px solid var(--border); border-radius:6px; padding:10px 16px; font-size:.78rem; color:var(--muted); text-align:center; flex:1; min-width:80px; }
+.flow-step strong { display:block; font-family:'Bebas Neue',sans-serif; font-size:1rem; color:var(--gold); letter-spacing:.08em; }
+.flow-arrow { color:var(--border); font-size:1.2rem; }
+.principle-cards { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media(max-width:600px){ .principle-cards { grid-template-columns:1fr; } }
+.pc { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:16px 18px; border-top:3px solid var(--gold); }
+.pc-letter { width:34px; height:34px; border-radius:50%; background:var(--gold); display:flex; align-items:center; justify-content:center; font-family:'Bebas Neue',sans-serif; font-size:1.1rem; color:#0b0f0e; margin-bottom:10px; }
+.pc-title { font-family:'Bebas Neue',sans-serif; font-size:1.05rem; letter-spacing:.08em; color:var(--text); margin-bottom:6px; }
+.pc p { font-size:.83rem; color:#9ab0a4; line-height:1.55; }
+.tag { display:inline-block; background:rgba(201,168,76,.1); border:1px solid rgba(201,168,76,.25); color:var(--gold); font-size:.65rem; letter-spacing:.14em; text-transform:uppercase; padding:2px 8px; border-radius:3px; margin-top:8px; }
+
+/* ── CALLS TAB ──────────────────────────────────────────────── */
+.calls-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media(max-width:600px){ .calls-grid { grid-template-columns:1fr; } }
+.call-block { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:18px 20px; }
+.call-block h3 { font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.1em; color:var(--gold); margin-bottom:12px; }
+.call-row { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:8px 0; border-bottom:1px solid rgba(255,255,255,.04); font-size:.82rem; }
+.call-row:last-child { border-bottom:none; }
+.cr-desc { color:var(--muted); }
+.cr-code { background:var(--surface); border:1px solid var(--border); color:var(--text); font-family:'DM Sans',sans-serif; font-size:.72rem; font-weight:700; letter-spacing:.1em; padding:3px 10px; border-radius:3px; white-space:nowrap; }
+.cr-code.red { color:var(--red); border-color:rgba(217,64,64,.3); }
+.tempo-cancel { display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
+.tc-btn { background:rgba(201,168,76,.08); border:1px solid rgba(201,168,76,.2); color:var(--gold); font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.1em; padding:6px 14px; border-radius:4px; }
+
+/* ── MAUL ATTACK ────────────────────────────────────────────── */
+.maul-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:12px; margin-bottom:16px; }
+.maul-card { background:var(--card); border:1px solid var(--border); border-top:3px solid var(--gold); border-radius:8px; padding:16px 16px; }
+.mc-role { font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.1em; color:var(--gold); margin-bottom:8px; }
+.maul-card p { font-size:.82rem; color:#9ab0a4; line-height:1.55; }
+.maul-note { background:var(--bg); border:1px solid var(--border); border-left:3px solid var(--gold); border-radius:6px; padding:14px 18px; font-size:.83rem; color:#9ab0a4; line-height:1.8; margin-top:16px; }
+.maul-note-title { font-family:'Bebas Neue',sans-serif; font-size:.95rem; letter-spacing:.1em; color:var(--gold); margin-bottom:8px; }
+.mantra-box { background:linear-gradient(135deg,rgba(201,168,76,.05),rgba(46,204,122,.03)); border:1px solid rgba(201,168,76,.15); border-radius:8px; padding:16px 22px; font-family:'Bebas Neue',sans-serif; font-size:1.05rem; letter-spacing:.08em; color:var(--muted); text-align:center; margin-top:12px; }
+
+/* ── FORMATIONS ─────────────────────────────────────────────── */
+.formation-view { display:none; }
+.formation-view.active { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+@media(max-width:700px){ .formation-view.active { grid-template-columns:1fr; } }
+
+/* ── DEFENCE ────────────────────────────────────────────────── */
+.colour-key { display:flex; gap:20px; flex-wrap:wrap; margin-bottom:16px; font-size:.76rem; }
+.ck-item { display:flex; align-items:center; gap:6px; }
+.ck-dot { width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+.defence-notes { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px; }
+@media(max-width:600px){ .defence-notes { grid-template-columns:1fr; } }
+.dn-card { background:var(--card); border:1px solid var(--border); border-radius:6px; padding:14px 16px; font-size:.83rem; color:#9ab0a4; line-height:1.6; }
+.dn-card strong { display:block; color:var(--text); font-size:.88rem; margin-bottom:4px; }
+
+/* ── SCRUM ──────────────────────────────────────────────────── */
+.scrum-pillars { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin-bottom:20px; }
+.scrum-pillar { background:var(--card); border:1px solid var(--border); border-radius:8px; padding:18px; text-align:center; }
+.sp-icon { font-size:1.8rem; margin-bottom:8px; display:block; }
+.scrum-pillar h3 { font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.08em; color:var(--gold); margin-bottom:6px; }
+.scrum-pillar p  { font-size:.8rem; color:#9ab0a4; line-height:1.5; }
+.scrum-calls { display:flex; flex-direction:column; gap:6px; margin-bottom:16px; }
+.sc-row { display:flex; align-items:center; gap:12px; padding:10px 14px; background:var(--card); border:1px solid var(--border); border-radius:6px; font-size:.84rem; }
+.sc-phase { color:var(--muted); min-width:100px; }
+.sc-call  { color:var(--gold); font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:.08em; }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ─────────────────────────────────────────────────── -->
+<header>
+  <div class="header-badge" id="hdr-badge">RC</div>
+  <div>
+    <h1 id="hdr-name">Club Name</h1>
+    <p id="hdr-sub">Forward's Player Guide</p>
+  </div>
+</header>
+
+<!-- ── NAV ───────────────────────────────────────────────────── -->
+<nav id="main-nav"></nav>
+
+<!-- ── MAIN ──────────────────────────────────────────────────── -->
+<main>
+
+  <!-- ── TAB 1: GAME DAY ──────────────────────────────────── -->
+  <div class="section active" id="tab-gameday">
+    <div class="section-header">
+      <h2 id="gd-heading">Game Day</h2>
+      <span class="subtitle" id="gd-subtitle">Starting XV · Lineout Positions</span>
+    </div>
+
+    <!-- Match banner -->
+    <div class="match-banner" id="match-banner"></div>
+
+    <!-- Starting Forwards -->
+    <div class="diagram-wrapper">
+      <div class="diagram-title">Starting Forwards <span class="pill">XV</span></div>
+      <div class="squad-list" id="starting-list"></div>
+    </div>
+
+    <!-- Bench -->
+    <div class="diagram-wrapper">
+      <div class="diagram-title">Forward Substitutes <span class="pill">BENCH</span></div>
+      <div class="squad-list" id="bench-list"></div>
+    </div>
+
+    <!-- Lineout Positions -->
+    <div class="diagram-wrapper">
+      <div class="diagram-title">Lineout Positions <span class="pill" id="lo-opp-pill">GAME DAY</span></div>
+      <div class="formation-selector">
+        <button class="fmtn-btn active" onclick="showHungaryLineout('h7')">7-Man</button>
+        <button class="fmtn-btn" onclick="showHungaryLineout('h6')">6-Man</button>
+        <button class="fmtn-btn" onclick="showHungaryLineout('h5')">5-Man</button>
+      </div>
+
+      <div id="h7" class="hungary-lo active"></div>
+      <div id="h6" class="hungary-lo"></div>
+      <div id="h5" class="hungary-lo"></div>
+    </div>
+
+    <!-- Defensive Lineout -->
+    <div class="diagram-wrapper">
+      <div class="diagram-title">Defensive Lineout <span class="pill">7-MAN</span></div>
+      <div id="def-lo-svg-wrap"></div>
+      <div class="colour-key" style="margin-top:10px;">
+        <div class="ck-item"><div class="ck-dot" style="background:#6fa3e8"></div><span style="color:#6fa3e8">Lifters / Driving</span></div>
+        <div class="ck-item"><div class="ck-dot" style="background:#2ecc7a"></div><span style="color:#2ecc7a">Compete / Jump</span></div>
+        <div class="ck-item"><div class="ck-dot" style="background:#d94040"></div><span style="color:#d94040">DSpace / Hinge</span></div>
+      </div>
+      <div id="def-lo-summary" style="font-size:.82rem;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px 14px;line-height:2.1;margin-top:10px;"></div>
+      <!-- Defensive competition cards -->
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px;">
+        <div style="background:var(--card);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:6px;padding:14px 16px;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.1em;color:var(--accent);margin-bottom:6px;">🏉 COMPETITION IN THE AIR — PRE CALLED</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;">
+            <span style="background:rgba(46,204,122,.1);border:1px solid rgba(46,204,122,.3);color:var(--accent);font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:600;padding:4px 12px;border-radius:4px;letter-spacing:.08em;">MIRROR</span>
+            <span style="background:rgba(46,204,122,.1);border:1px solid rgba(46,204,122,.3);color:var(--accent);font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:600;padding:4px 12px;border-radius:4px;letter-spacing:.08em;">PRESSURE 1 PLAYER</span>
+            <span style="background:rgba(46,204,122,.1);border:1px solid rgba(46,204,122,.3);color:var(--accent);font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:600;padding:4px 12px;border-radius:4px;letter-spacing:.08em;">1 AREA</span>
+          </div>
+          <div style="font-size:.8rem;color:var(--muted);margin-top:8px;">Decision made before the lineout is set. All players must know the call.</div>
+        </div>
+        <div style="background:var(--card);border:1px solid var(--border);border-left:4px solid var(--red);border-radius:6px;padding:14px 16px;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.1em;color:var(--red);margin-bottom:6px;">💪 COMPETITION ON THE GROUND — MAUL</div>
+          <div style="font-size:.84rem;color:#b0c0b8;line-height:1.65;">No challenge to the ball. Put bodies in against the maul — disrupt, drive and slow ball at source.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TAB 2: PRINCIPLES ─────────────────────────────────── -->
+  <div class="section" id="tab-principles">
+    <div class="section-header">
+      <h2>Lineout Principles</h2>
+      <span class="subtitle">The Framework</span>
+    </div>
+    <div class="info-alert">The lineout ends when the backs have the ball. Finish all aspects with purpose and intent.</div>
+    <div class="principles-flow" id="principles-flow"></div>
+    <div class="principle-cards" id="principle-cards"></div>
+  </div>
+
+  <!-- ── TAB 3: CALLS ──────────────────────────────────────── -->
+  <div class="section" id="tab-calls">
+    <div class="section-header">
+      <h2>Calls &amp; Starters</h2>
+      <span class="subtitle">Movement Triggers · Jumper Calls · Position Codes</span>
+    </div>
+    <div class="calls-grid">
+      <div class="call-block">
+        <h3>Movement LO Starters</h3>
+        <div id="starter-calls"></div>
+        <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:12px;margin-bottom:8px;">CHECK X = CANCEL</div>
+        <div class="tempo-cancel" id="check-calls"></div>
+      </div>
+      <div class="call-block">
+        <h3>Calls to 9 from Jumper</h3>
+        <div id="jumper-calls"></div>
+      </div>
+    </div>
+
+    <!-- TEMPO Position Codes -->
+    <div class="diagram-wrapper" style="margin-top:16px;">
+      <div class="diagram-title">Lineout Position Codes <span class="pill" id="tempo-pill">TEMPO</span></div>
+      <div id="tempo-diagrams"></div>
+    </div>
+  </div>
+
+  <!-- ── TAB 4: MAUL ATTACK ────────────────────────────────── -->
+  <div class="section" id="tab-maul">
+    <div class="section-header">
+      <h2>LO Maul Attack</h2>
+      <span class="subtitle">Roles · Responsibilities · Execution</span>
+    </div>
+    <div class="maul-grid" id="maul-roles"></div>
+    <div class="maul-note">
+      <div class="maul-note-title">★ Important Updates / Small Details - Big Impact</div>
+      <div id="maul-note-text"></div>
+    </div>
+    <div id="maul-mantras"></div>
+  </div>
+
+  <!-- ── TAB 5: FORMATIONS ─────────────────────────────────── -->
+  <div class="section" id="tab-formations">
+    <div class="section-header">
+      <h2>Lineout Formations</h2>
+      <span class="subtitle">TEMPO System · Attacking Shapes</span>
+    </div>
+    <div class="formation-selector" id="fmtn-selector"></div>
+
+    <!-- Static formation views - these rarely change club to club -->
+    <div class="formation-view active" id="f7">
+      <div class="diagram-wrapper" style="margin-bottom:0;">
+        <div class="diagram-title">TEMPO — Attacking Side <span class="pill">7 MAN</span></div>
+        <svg class="field-svg" viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:6px;">
+          <rect width="480" height="280" rx="6" fill="#1a3d2b"/>
+          <rect x="60" y="20" width="360" height="240" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+          <line x1="110" y1="20" x2="110" y2="260" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="4 3"/>
+          <line x1="370" y1="20" x2="370" y2="260" stroke="rgba(255,255,255,0.1)" stroke-width="1" stroke-dasharray="4 3"/>
+          <line x1="60" y1="140" x2="420" y2="140" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+          <circle cx="30" cy="140" r="16" fill="#1d6a48" stroke="#c9a84c" stroke-width="2"/>
+          <text x="30" y="145" text-anchor="middle" font-family="Bebas Neue" font-size="13" fill="#c9a84c">2</text>
+          <circle cx="240" cy="100" r="14" fill="#1d6a48" stroke="#c9a84c" stroke-width="1.5"/>
+          <text x="240" y="105" text-anchor="middle" font-family="Bebas Neue" font-size="12" fill="#c9a84c">9</text>
+          <g font-family="Bebas Neue" font-size="12">
+            <circle cx="130" cy="140" r="14" fill="#1a3a6e" stroke="#6fa3e8" stroke-width="1.5"/>
+            <text x="130" y="144" text-anchor="middle" fill="#fff" font-size="11">1</text>
+            <circle cx="180" cy="140" r="14" fill="#1a3a6e" stroke="#6fa3e8" stroke-width="1.5"/>
+            <text x="180" y="144" text-anchor="middle" fill="#fff" font-size="11">2</text>
+            <text x="180" y="165" text-anchor="middle" fill="#6fa3e8" font-size="9">T</text>
+            <circle cx="220" cy="140" r="14" fill="#1a3a6e" stroke="#6fa3e8" stroke-width="1.5"/>
+            <text x="220" y="144" text-anchor="middle" fill="#fff" font-size="11">3</text>
+            <text x="220" y="165" text-anchor="middle" fill="#6fa3e8" font-size="9">E</text>
+            <circle cx="260" cy="140" r="14" fill="#2e6e50" stroke="#2ecc7a" stroke-width="2"/>
+            <text x="260" y="144" text-anchor="middle" fill="#fff" font-size="11">4</text>
+            <text x="260" y="165" text-anchor="middle" fill="#2ecc7a" font-size="9">M</text>
+            <circle cx="300" cy="140" r="14" fill="#1a3a6e" stroke="#6fa3e8" stroke-width="1.5"/>
+            <text x="300" y="144" text-anchor="middle" fill="#fff" font-size="11">5</text>
+            <text x="300" y="165" text-anchor="middle" fill="#6fa3e8" font-size="9">P</text>
+            <circle cx="340" cy="140" r="14" fill="#1a3a6e" stroke="#6fa3e8" stroke-width="1.5"/>
+            <text x="340" y="144" text-anchor="middle" fill="#fff" font-size="11">6</text>
+            <text x="340" y="165" text-anchor="middle" fill="#6fa3e8" font-size="9">O</text>
+            <circle cx="380" cy="140" r="14" fill="#1a3a6e" stroke="#6fa3e8" stroke-width="1.5"/>
+            <text x="380" y="144" text-anchor="middle" fill="#fff" font-size="11">7</text>
+          </g>
+          <text x="240" y="20" text-anchor="middle" font-family="Bebas Neue" font-size="11" fill="rgba(255,255,255,0.4)" letter-spacing="2">ATTACKING LINEOUT · _ T E M P O _</text>
+        </svg>
+      </div>
+      <div class="diagram-wrapper" style="margin-bottom:0;">
+        <div class="diagram-title">Position Code Summary</div>
+        <div style="font-size:.84rem;color:var(--text);line-height:2.2;">
+          <span style="color:var(--muted);">1 · </span>Front (no code) &nbsp;|&nbsp;
+          <span style="color:var(--gold);">T · </span>2nd position &nbsp;|&nbsp;
+          <span style="color:var(--gold);">E · </span>3rd position &nbsp;|&nbsp;
+          <span style="color:var(--accent);">M · </span>Middle (jumper) &nbsp;|&nbsp;
+          <span style="color:var(--gold);">P · </span>5th position &nbsp;|&nbsp;
+          <span style="color:var(--gold);">O · </span>6th position &nbsp;|&nbsp;
+          <span style="color:var(--muted);">7 · </span>Tail (no code)
+        </div>
+        <div style="margin-top:12px;padding:10px 14px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:.8rem;color:var(--muted);">
+          ● First and last positions <strong style="color:var(--text);">never</strong> receive a letter code in any lineout size.
+        </div>
+      </div>
+    </div>
+
+    <!-- Placeholder views for other formations — add SVG content as needed -->
+    <div class="formation-view" id="f7shapes">
+      <div class="diagram-wrapper" style="grid-column:1/-1;margin-bottom:0;">
+        <div class="diagram-title">7-Man Example Shapes <span class="pill">GROUPINGS</span></div>
+        <div style="color:var(--muted);font-size:.84rem;">Add 7-man shape diagrams here.</div>
+      </div>
+    </div>
+    <div class="formation-view" id="f6">
+      <div class="diagram-wrapper" style="margin-bottom:0;">
+        <div class="diagram-title">TEMPO — Attacking Side <span class="pill">6 MAN</span></div>
+        <div style="color:var(--muted);font-size:.84rem;">Add 6-man TEMPO diagram here.</div>
+      </div>
+    </div>
+    <div class="formation-view" id="f6shapes">
+      <div class="diagram-wrapper" style="grid-column:1/-1;margin-bottom:0;">
+        <div class="diagram-title">6-Man Example Shapes <span class="pill">GROUPINGS</span></div>
+        <div style="color:var(--muted);font-size:.84rem;">Add 6-man shape diagrams here.</div>
+      </div>
+    </div>
+    <div class="formation-view" id="f5tempo">
+      <div class="diagram-wrapper" style="margin-bottom:0;">
+        <div class="diagram-title">TEMPO — Attacking Side <span class="pill">5 MAN</span></div>
+        <div style="color:var(--muted);font-size:.84rem;">Add 5-man TEMPO diagram here.</div>
+      </div>
+    </div>
+    <div class="formation-view" id="f5">
+      <div class="diagram-wrapper" style="grid-column:1/-1;margin-bottom:0;">
+        <div class="diagram-title">5-Man Example Shapes <span class="pill">GROUPINGS</span></div>
+        <div style="color:var(--muted);font-size:.84rem;">Add 5-man shape diagrams here.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TAB 6: DEFENCE ────────────────────────────────────── -->
+  <div class="section" id="tab-defence">
+    <div class="section-header">
+      <h2>Lineout Defence</h2>
+      <span class="subtitle">Defensive Shapes &amp; Principles</span>
+    </div>
+    <div class="colour-key">
+      <div class="ck-item"><div class="ck-dot" style="background:#6fa3e8"></div><span style="color:#6fa3e8">Lifters / Driving</span></div>
+      <div class="ck-item"><div class="ck-dot" style="background:#2ecc7a"></div><span style="color:#2ecc7a">Compete / Jump</span></div>
+      <div class="ck-item"><div class="ck-dot" style="background:#d94040"></div><span style="color:#d94040">DSpace / Hinge</span></div>
+    </div>
+
+    <!-- Standard shape -->
+    <div class="diagram-wrapper" style="margin-bottom:16px;">
+      <div class="diagram-title">Standard Defensive Shape <span class="pill">7-MAN</span></div>
+      <svg viewBox="0 0 560 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:6px;margin-bottom:12px;">
+        <rect width="560" height="120" rx="6" fill="#1a1010"/>
+        <text x="280" y="14" text-anchor="middle" font-family="Bebas Neue" font-size="9" fill="rgba(255,255,255,0.25)" letter-spacing="2">STANDARD DEFENSIVE SHAPE</text>
+        <line x1="50" y1="65" x2="530" y2="65" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <circle cx="28" cy="65" r="16" fill="#1a3a6e" stroke="#6fa3e8" stroke-width="2"/>
+        <text x="28" y="61" text-anchor="middle" font-family="Bebas Neue" font-size="8" fill="#6fa3e8">DEF</text>
+        <text x="28" y="71" text-anchor="middle" font-family="Bebas Neue" font-size="7" fill="#6fa3e8">HOO</text>
+        <circle cx="110" cy="65" r="15" fill="#1a3a6e" stroke="#6fa3e8" stroke-width="1.5"/>
+        <text x="110" y="69" text-anchor="middle" font-family="Bebas Neue" font-size="8" fill="#6fa3e8">1</text>
+        <circle cx="180" cy="65" r="15" fill="#1a4a2a" stroke="#2ecc7a" stroke-width="2"/>
+        <text x="180" y="65" text-anchor="middle" font-family="Bebas Neue" font-size="10" fill="#2ecc7a">●</text>
+        <circle cx="250" cy="65" r="15" fill="#5a1a1a" stroke="#d94040" stroke-width="2"/>
+        <text x="250" y="65" text-anchor="middle" font-family="Bebas Neue" font-size="10" fill="#d94040">●</text>
+        <circle cx="320" cy="65" r="15" fill="#5a1a1a" stroke="#d94040" stroke-width="2"/>
+        <text x="320" y="65" text-anchor="middle" font-family="Bebas Neue" font-size="10" fill="#d94040">●</text>
+        <circle cx="390" cy="65" r="15" fill="#1a4a2a" stroke="#2ecc7a" stroke-width="2"/>
+        <text x="390" y="65" text-anchor="middle" font-family="Bebas Neue" font-size="10" fill="#2ecc7a">●</text>
+        <circle cx="458" cy="65" r="15" fill="#1a3a6e" stroke="#6fa3e8" stroke-width="1.5"/>
+        <text x="458" y="65" text-anchor="middle" font-family="Bebas Neue" font-size="10" fill="#6fa3e8">●</text>
+        <circle cx="522" cy="65" r="15" fill="#1a3a6e" stroke="#6fa3e8" stroke-width="1.5"/>
+        <text x="522" y="69" text-anchor="middle" font-family="Bebas Neue" font-size="8" fill="#6fa3e8">7</text>
+      </svg>
+      <div style="font-size:.8rem;color:var(--muted);">If we set early, be prepared that they may choose to attack the dead space between the pods. Standard shape but could change sporadically and delayed.</div>
+    </div>
+
+    <!-- Dynamic hinge -->
+    <div class="diagram-wrapper" style="margin-bottom:16px;">
+      <div class="diagram-title">Dynamic Hinge Option <span class="pill">7-MAN · COMPLEX</span></div>
+      <svg viewBox="0 0 560 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:6px;margin-bottom:12px;">
+        <rect width="560" height="120" rx="6" fill="#101a10"/>
+        <text x="280" y="14" text-anchor="middle" font-family="Bebas Neue" font-size="9" fill="rgba(255,255,255,0.25)" letter-spacing="2">DYNAMIC HINGE OPTION</text>
+        <line x1="50" y1="65" x2="530" y2="65" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <circle cx="28" cy="65" r="16" fill="#1a3a6e" stroke="#6fa3e8" stroke-width="2"/>
+        <text x="28" y="61" text-anchor="middle" font-family="Bebas Neue" font-size="8" fill="#6fa3e8">DEF</text>
+        <text x="28" y="71" text-anchor="middle" font-family="Bebas Neue" font-size="7" fill="#6fa3e8">HOO</text>
+        <circle cx="110" cy="65" r="15" fill="#1a3a6e" stroke="#6fa3e8" stroke-width="1.5"/>
+        <text x="110" y="69" text-anchor="middle" font-family="Bebas Neue" font-size="8" fill="#6fa3e8">1</text>
+        <circle cx="180" cy="65" r="15" fill="#1a4a2a" stroke="#2ecc7a" stroke-width="2"/>
+        <text x="180" y="65" text-anchor="middle" font-family="Bebas Neue" font-size="10" fill="#2ecc7a">●</text>
+        <circle cx="250" cy="65" r="15" fill="#5a1a1a" stroke="#d94040" stroke-width="2"/>
+        <text x="250" y="65" text-anchor="middle" font-family="Bebas Neue" font-size="10" fill="#d94040">●</text>
+        <circle cx="320" cy="65" r="15" fill="#1a4a2a" stroke="#2ecc7a" stroke-width="2"/>
+        <text x="320" y="65" text-anchor="middle" font-family="Bebas Neue" font-size="10" fill="#2ecc7a">●</text>
+        <circle cx="390" cy="65" r="15" fill="#1a3a6e" stroke="#6fa3e8" stroke-width="1.5"/>
+        <text x="390" y="65" text-anchor="middle" font-family="Bebas Neue" font-size="10" fill="#6fa3e8">●</text>
+        <circle cx="458" cy="65" r="15" fill="#1a3a6e" stroke="#6fa3e8" stroke-width="1.5"/>
+        <text x="458" y="65" text-anchor="middle" font-family="Bebas Neue" font-size="10" fill="#6fa3e8">●</text>
+        <circle cx="522" cy="65" r="15" fill="#5a1a1a" stroke="#d94040" stroke-width="2"/>
+        <text x="522" y="69" text-anchor="middle" font-family="Bebas Neue" font-size="8" fill="#d94040">7</text>
+      </svg>
+      <div style="font-size:.8rem;color:var(--muted);">Hinge defence on E to target 2–4 space. More dynamic but complex — requires Hinge Player and jumper to be as explosive as possible. Pre-call and awareness.</div>
+    </div>
+
+    <div class="defence-notes">
+      <div class="dn-card"><strong>9 — 5m Channel</strong>9 in the 5m channel to allow extra forward into the LO. Use often if you see a PLUS1 or Strike play heavy at the hinge with context of play.</div>
+      <div class="dn-card"><strong>Normal Positioning</strong>9 to sweep, keep the inside or connect the hinge. Tail of the LO to support.</div>
+      <div class="dn-card"><strong>Protect Hinge / Target</strong>Identify the target jumper. Protect the hinge and cover any bad ball or overthrown ball.</div>
+      <div class="dn-card"><strong>One Goal — All In</strong>Defence LO has one clear objective. Everyone committed to that goal. Attack the floor or in air.</div>
+    </div>
+  </div>
+
+  <!-- ── TAB 7: SCRUM ──────────────────────────────────────── -->
+  <div class="section" id="tab-scrum">
+    <div class="section-header">
+      <h2>Scrum Principles</h2>
+      <span class="subtitle">Foundations &amp; Timing</span>
+    </div>
+    <div class="scrum-pillars" id="scrum-pillars"></div>
+    <div class="diagram-wrapper">
+      <div class="diagram-title">Sequence &amp; Timing</div>
+      <div class="scrum-calls" id="scrum-calls"></div>
+    </div>
+    <div id="scrum-mantras"></div>
+  </div>
+
+  <!-- ── TAB 8: RESTARTS (disabled by default) ────────────── -->
+  <div class="section" id="tab-restarts">
+    <div class="section-header">
+      <h2>Restarts</h2>
+      <span class="subtitle">Kick-off &amp; Restart Roles</span>
+    </div>
+    <div class="info-alert">Restart content to be added for this club.</div>
+  </div>
+
+  <!-- ── TAB 9: OPPOSITION (disabled by default) ──────────── -->
+  <div class="section" id="tab-opposition">
+    <div class="section-header">
+      <h2>Opposition Notes</h2>
+      <span class="subtitle">Scouting &amp; Key Threats</span>
+    </div>
+    <div class="info-alert">Opposition notes to be added weekly.</div>
+  </div>
+
+</main>
+
+<script>
+// ════════════════════════════════════════════════════════════════
+//  TEMPLATE ENGINE — reads CLUB config and renders everything
+//  Do not edit unless adding a new feature
+// ════════════════════════════════════════════════════════════════
+
+// ── Apply CSS variables from config ──────────────────────────
+document.documentElement.style.setProperty('--gold',    CLUB.primaryColor);
+document.documentElement.style.setProperty('--accent',  CLUB.accentColor);
+// If accent is near-white, ensure tab number badge text stays readable
+if (CLUB.accentColor === '#f0f0f0' || CLUB.accentColor === '#ffffff') {
+  document.documentElement.style.setProperty('--accent-text', '#1a1a1a');
+} else {
+  document.documentElement.style.setProperty('--accent-text', '#ffffff');
+}
+document.documentElement.style.setProperty('--red',     CLUB.dangerColor);
+document.documentElement.style.setProperty('--bg',      CLUB.bgColor);
+document.documentElement.style.setProperty('--card',    CLUB.surfaceColor);
+document.documentElement.style.setProperty('--border',  CLUB.borderColor);
+
+// ── Page title & header ───────────────────────────────────────
+document.getElementById('page-title').textContent = CLUB.name + ' — ' + CLUB.subtitle;
+document.getElementById('hdr-badge').textContent  = CLUB.badge || CLUB.name.split(' ').map(w=>w[0]).join('').slice(0,2);
+document.getElementById('hdr-name').textContent   = CLUB.name;
+document.getElementById('hdr-sub').textContent    = CLUB.subtitle;
+
+// ── Build nav tabs ────────────────────────────────────────────
+const nav = document.getElementById('main-nav');
+CLUB.tabs.filter(t => t.enabled).forEach((t, i) => {
+  const btn = document.createElement('button');
+  btn.className = 'tab-btn' + (i === 0 ? ' active' : '');
+  btn.innerHTML = `<span class="tab-num">${t.number}</span>${t.label}`;
+  btn.onclick = function() { showTab(t.id, this); };
+  nav.appendChild(btn);
+});
+
+// ── Match banner ──────────────────────────────────────────────
+const banner = document.getElementById('match-banner');
+const dateStr = CLUB.matchDate ? new Date(CLUB.matchDate).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'long',year:'numeric'}) : '';
+banner.innerHTML = `
+  <div>
+    <div class="match-opp">vs ${CLUB.opposition}</div>
+    <div class="match-meta">${dateStr} &nbsp;·&nbsp; ${CLUB.matchVenue}</div>
+  </div>
+  ${CLUB.matchNotes ? `<div class="match-note">📋 ${CLUB.matchNotes}</div>` : ''}
+`;
+document.getElementById('lo-opp-pill').textContent = CLUB.opposition.toUpperCase();
+document.getElementById('gd-heading').textContent  = CLUB.opposition + ' Game';
+
+// ── Squad lists ───────────────────────────────────────────────
+function buildSquadRow(p, isBench) {
+  const callerBadge = p.caller
+    ? `<span class="caller-badge caller-${p.callerColor || 'gold'}">* Lineout Caller ${p.caller}</span>`
+    : '';
+  return `
+    <div class="squad-row">
+      <div class="squad-num${isBench ? ' bench' : ''}">${p.number}</div>
+      <div>
+        <div class="squad-name">${p.name} ${callerBadge}</div>
+        <div class="squad-pos">${p.position}${p.caller ? ` &nbsp;·&nbsp; <span style="color:var(--${p.callerColor||'gold'})">* Lineout Caller ${p.caller}</span>` : ''}</div>
+      </div>
+    </div>`;
+}
+document.getElementById('starting-list').innerHTML = CLUB.starting.map(p => buildSquadRow(p, false)).join('');
+document.getElementById('bench-list').innerHTML    = CLUB.bench.map(p => buildSquadRow(p, true)).join('');
+
+// ── Defensive lineout SVG ─────────────────────────────────────
+function defColours(type) {
+  const map = {
+    blue:  { f:'#1a3a6e', s:'#6fa3e8' },
+    green: { f:'#1a4a2a', s:'#2ecc7a' },
+    red:   { f:'#5a1a1a', s:'#d94040' },
+  };
+  return map[type] || map.blue;
+}
+
+const defPositions = CLUB.defensiveLineout.positions;
+const svgW = 560, spacing = Math.floor((svgW - 80) / (defPositions.length + 1));
+let defCircles = '';
+let defSummary = `<span style="color:var(--muted);">Def·</span>${CLUB.defensiveLineout.hooker.name}`;
+
+defPositions.forEach((p, i) => {
+  const cx = 110 + i * (spacing + 10);
+  const c  = defColours(p.color);
+  defCircles += `
+    <circle cx="${cx}" cy="85" r="16" fill="${c.f}" stroke="${c.s}" stroke-width="2"/>
+    <text x="${cx}" y="81" text-anchor="middle" font-family="Bebas Neue" font-size="9" fill="#fff">${p.name}</text>`;
+  const textColor = p.color === 'green' ? 'var(--accent)' : p.color === 'red' ? 'var(--red)' : 'var(--blue)';
+  defSummary += ` &nbsp;|&nbsp; <span style="color:${textColor}">${i === 0 || i === defPositions.length-1 ? i+1+'·' : (i)+'·'}</span>${p.name}`;
+});
+
+const hookerC = defColours(CLUB.defensiveLineout.hooker.color);
+document.getElementById('def-lo-svg-wrap').innerHTML = `
+  <svg viewBox="0 0 560 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:6px;margin-bottom:16px;">
+    <rect width="560" height="160" rx="6" fill="#1a1010"/>
+    <text x="280" y="16" text-anchor="middle" font-family="Bebas Neue" font-size="9" fill="rgba(255,255,255,0.25)" letter-spacing="2">DEFENSIVE 7-MAN</text>
+    <line x1="50" y1="85" x2="530" y2="85" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+    <circle cx="28" cy="85" r="17" fill="${hookerC.f}" stroke="${hookerC.s}" stroke-width="2"/>
+    <text x="28" y="81" text-anchor="middle" font-family="Bebas Neue" font-size="7" fill="#fff">${CLUB.defensiveLineout.hooker.name}</text>
+    <text x="28" y="91" text-anchor="middle" font-family="Bebas Neue" font-size="7" fill="${hookerC.s}">DEF</text>
+    ${defCircles}
+  </svg>`;
+document.getElementById('def-lo-summary').innerHTML = defSummary;
+
+// ── Lineout positions builder ─────────────────────────────────
+const LO_COLORS = { bg:'#1a3a6e', stroke:'#6fa3e8', jumperBg:'#2e6e50', jumperStroke:'#2ecc7a' };
+
+function buildLoSVG(size, option) {
+  const data  = CLUB.lineout[size][option];
+  const pos   = data.pos;
+  const n     = pos.length;
+  const svgW2 = 100 + n * 72;
+  const throwX = 30, spacing2 = 70;
+  let circles = '';
+  pos.forEach((name, i) => {
+    const cx = 90 + i * spacing2;
+    const isJumper = i === data.jumper;
+    const bg = isJumper ? LO_COLORS.jumperBg : LO_COLORS.bg;
+    const st = isJumper ? LO_COLORS.jumperStroke : LO_COLORS.stroke;
+    const sw = isJumper ? '2' : '1.5';
+    circles += `
+      <circle cx="${cx}" cy="75" r="15" fill="${bg}" stroke="${st}" stroke-width="${sw}"/>
+      <text x="${cx}" y="71" text-anchor="middle" font-family="Bebas Neue" font-size="8" fill="#fff">${name}</text>
+      <text x="${cx}" y="81" text-anchor="middle" font-family="Bebas Neue" font-size="7" fill="${st}">${i === 0 ? '1' : i === n-1 ? n : ''}</text>`;
+  });
+  const bgColor = option === 'starting' ? '#1a3d2b' : option === 'cover1' ? '#1a2820' : '#181818';
+  const label   = option === 'starting' ? 'STARTING' : option === 'cover1' ? 'COVER 1' : 'FINISHERS';
+  return `
+    <svg viewBox="0 0 ${svgW2} 140" xmlns="http://www.w3.org/2000/svg" style="width:100%;border-radius:6px;margin-bottom:10px;">
+      <rect width="${svgW2}" height="140" rx="6" fill="${bgColor}"/>
+      <text x="${svgW2/2}" y="16" text-anchor="middle" font-family="Bebas Neue" font-size="9" fill="rgba(255,255,255,0.3)" letter-spacing="2">${n}-MAN · ${label}</text>
+      <line x1="50" y1="75" x2="${svgW2-30}" y2="75" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+      <circle cx="${throwX}" cy="75" r="17" fill="#1d6a48" stroke="#c9a84c" stroke-width="2"/>
+      <text x="${throwX}" y="71" text-anchor="middle" font-family="Bebas Neue" font-size="8" fill="#c9a84c">${data.throw}</text>
+      <text x="${throwX}" y="81" text-anchor="middle" font-family="Bebas Neue" font-size="7" fill="#c9a84c">THROW</text>
+      ${circles}
+    </svg>
+    <div style="font-size:.82rem;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:8px 14px;line-height:2.1;margin-bottom:${data.changes ? '6px' : '0'};">
+      <span style="color:var(--muted);">Throw·</span>${data.throw} &nbsp;|&nbsp; ${pos.map((p,i) => `<span style="color:var(--muted);">${i+1}·</span>${p}`).join(' &nbsp;|&nbsp; ')}
+    </div>
+    ${data.changes ? `<div style="font-size:.74rem;color:var(--red);margin-bottom:12px;">● ${data.changes}</div>` : ''}`;
+}
+
+function buildLoSection(sizeKey, containerId) {
+  const el = document.getElementById(containerId);
+  const label = sizeKey === 'sevenMan' ? 'h7' : sizeKey === 'sixMan' ? 'h6' : 'h5';
+  el.innerHTML = `
+    <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
+      <button class="lo-opt-btn active" onclick="showHungaryOption('${label}','${label}o1',this)">Starting</button>
+      <button class="lo-opt-btn" onclick="showHungaryOption('${label}','${label}o2',this)">Cover 1</button>
+      <button class="lo-opt-btn" onclick="showHungaryOption('${label}','${label}o3',this)">Finishers</button>
+    </div>
+    <div id="${label}o1" class="lo-option active">${buildLoSVG(sizeKey,'starting')}</div>
+    <div id="${label}o2" class="lo-option">${buildLoSVG(sizeKey,'cover1')}</div>
+    <div id="${label}o3" class="lo-option">${buildLoSVG(sizeKey,'finishers')}</div>`;
+}
+
+buildLoSection('sevenMan','h7');
+buildLoSection('sixMan',  'h6');
+buildLoSection('fiveMan', 'h5');
+
+// ── Principles tab ────────────────────────────────────────────
+const flow = document.getElementById('principles-flow');
+CLUB.principles.forEach((p, i) => {
+  if (i > 0) flow.innerHTML += '<span class="flow-arrow">→</span>';
+  flow.innerHTML += `<div class="flow-step"><strong>${p.title}</strong>${p.tag}</div>`;
+});
+
+const cards = document.getElementById('principle-cards');
+CLUB.principles.forEach(p => {
+  cards.innerHTML += `
+    <div class="pc">
+      <div class="pc-letter">${p.letter}</div>
+      <div class="pc-title">${p.title}</div>
+      <p>${p.body}</p>
+      <span class="tag">${p.tag}</span>
+    </div>`;
+});
+
+// ── Calls tab ─────────────────────────────────────────────────
+const starters = document.getElementById('starter-calls');
+CLUB.calls.starters.forEach(c => {
+  starters.innerHTML += `<div class="call-row"><span class="cr-desc">${c.trigger}</span><span class="cr-code">${c.call}</span></div>`;
+});
+
+const checks = document.getElementById('check-calls');
+CLUB.calls.checkCalls.forEach(l => {
+  checks.innerHTML += `<span class="tc-btn">${l}</span>`;
+});
+
+const jumper = document.getElementById('jumper-calls');
+CLUB.calls.jumperCalls.forEach(c => {
+  jumper.innerHTML += `<div class="call-row"><span class="cr-desc">${c.trigger}</span><span class="cr-code red">${c.call}</span></div>`;
+});
+
+document.getElementById('tempo-pill').textContent = CLUB.tempoCode;
+document.getElementById('tempo-diagrams').innerHTML = `
+  <div style="font-size:.84rem;color:var(--muted);line-height:1.9;">
+    <strong style="color:var(--text);">7-Man:</strong> _ T E M P O _ &nbsp;&nbsp;
+    <strong style="color:var(--text);">6-Man:</strong> _ T E M P _ &nbsp;&nbsp;
+    <strong style="color:var(--text);">5-Man:</strong> _ T E M _
+    <br/>First and last positions never receive a letter code in any lineout size.
+  </div>`;
+
+// ── Formations selector ───────────────────────────────────────
+const fsel = document.getElementById('fmtn-selector');
+[
+  ['f7','7-Man TEMPO'], ['f7shapes','7-Man Shapes'],
+  ['f6','6-Man TEMPO'], ['f6shapes','6-Man Shapes'],
+  ['f5tempo','5-Man TEMPO'], ['f5','5-Man Shapes'],
+].forEach(([id, label], i) => {
+  const btn = document.createElement('button');
+  btn.className = 'fmtn-btn' + (i===0?' active':'');
+  btn.textContent = label;
+  btn.onclick = function() { showFormation(id, this); };
+  fsel.appendChild(btn);
+});
+
+// ── Maul tab ──────────────────────────────────────────────────
+const maul = document.getElementById('maul-roles');
+CLUB.maul.roles.forEach(r => {
+  maul.innerHTML += `
+    <div class="maul-card">
+      <div class="mc-role">${r.icon} ${r.name}</div>
+      <p>${r.body}</p>
+    </div>`;
+});
+document.getElementById('maul-note-text').innerHTML = CLUB.maul.note.replace(/\n/g,'<br/>');
+const mantras = document.getElementById('maul-mantras');
+CLUB.maul.mantras.forEach(m => {
+  mantras.innerHTML += `<div class="mantra-box">${m}</div>`;
+});
+
+// ── Scrum tab ─────────────────────────────────────────────────
+const pillars = document.getElementById('scrum-pillars');
+CLUB.scrumPillars.forEach(p => {
+  pillars.innerHTML += `
+    <div class="scrum-pillar">
+      <span class="sp-icon">${p.icon}</span>
+      <h3>${p.title}</h3>
+      <p>${p.body}</p>
+    </div>`;
+});
+const scrumCalls = document.getElementById('scrum-calls');
+CLUB.scrumCalls.forEach(c => {
+  scrumCalls.innerHTML += `
+    <div class="sc-row">
+      <span class="sc-phase">${c.phase}</span>
+      <span class="sc-call">${c.call}</span>
+    </div>`;
+});
+const scrumMantras = document.getElementById('scrum-mantras');
+CLUB.scrumMantras.forEach(m => {
+  scrumMantras.innerHTML += `<div class="mantra-box" style="margin-top:10px;">${m}</div>`;
+});
+
+// ════════════════════════════════════════════════════════════════
+//  UI FUNCTIONS
+// ════════════════════════════════════════════════════════════════
+function showTab(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+function showFormation(id, btn) {
+  document.querySelectorAll('.formation-view').forEach(f => f.classList.remove('active'));
+  document.querySelectorAll('#fmtn-selector .fmtn-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+function showHungaryLineout(id) {
+  document.querySelectorAll('.hungary-lo').forEach(f => f.classList.remove('active'));
+  event.currentTarget.parentElement.querySelectorAll('.fmtn-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+function showHungaryOption(groupId, optionId, btn) {
+  const group = document.getElementById(groupId);
+  group.querySelectorAll('.lo-option').forEach(o => o.classList.remove('active'));
+  group.querySelectorAll('.lo-opt-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(optionId).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
