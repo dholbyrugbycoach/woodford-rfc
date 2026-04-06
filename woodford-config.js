@@ -1,12 +1,15 @@
+
+Copy
+
 // ════════════════════════════════════════════════════════════════
 //  WOODFORD RFC — config.js
 //  Last updated: April 2026
 //  ── WEEKLY sections marked with 🔁
 //  ── Setup sections marked with 🔧 (rarely change)
 // ════════════════════════════════════════════════════════════════
-
+ 
 const CLUB = {
-
+ 
   // ── 🔧 BRANDING ───────────────────────────────────────────────
   name:            "Woodford RFC",
   subtitle:        "Set Piece Guide",
@@ -17,15 +20,15 @@ const CLUB = {
   bgColor:         "#1e2422",       // dark charcoal background
   surfaceColor:    "#252e2b",       // card background
   borderColor:     "#2e3a36",       // card borders
-
-
+ 
+ 
   // ── 🔁 MATCH INFO (update every week) ────────────────────────
   opposition:      "Bristol RFC",
   matchDate:       "2026-04-12",
   matchVenue:      "Away",
   matchNotes:      "Bristol like to attack the front of the lineout early — watch their T position.",
-
-
+ 
+ 
   // ── 🔁 STARTING FORWARDS (update every week) ─────────────────
   starting: [
     { number: 1,  name: "TOM HARRIS",    position: "Loosehead Prop",    caller: null },
@@ -37,8 +40,8 @@ const CLUB = {
     { number: 7,  name: "PATRICK RYAN",  position: "Openside Flanker",  caller: null },
     { number: 8,  name: "LUKE DOYLE",    position: "Number 8",          caller: null },
   ],
-
-
+ 
+ 
   // ── 🔁 BENCH FORWARDS (update every week) ────────────────────
   bench: [
     { number: 16, name: "CONOR WHITE",   position: "Prop",              caller: null },
@@ -47,8 +50,8 @@ const CLUB = {
     { number: 19, name: "JACK BRENNAN",  position: "Second Row",        caller: "C", callerColor: "blue" },
     { number: 20, name: "NIALL DALY",    position: "Back Row",          caller: null },
   ],
-
-
+ 
+ 
   // ── 🔁 LINEOUT POSITIONS (update every week) ──────────────────
   lineout: {
     sevenMan: {
@@ -109,8 +112,8 @@ const CLUB = {
       },
     },
   },
-
-
+ 
+ 
   // ── 🔧 DEFENSIVE LINEOUT ──────────────────────────────────────
   defensiveLineout: {
     hooker: { name: "HOO", color: "blue" },
@@ -124,8 +127,8 @@ const CLUB = {
       { name: "7",  color: "blue"  },
     ],
   },
-
-
+ 
+ 
   // ── 🔧 CALLS & STARTERS ───────────────────────────────────────
   tempoCode: "TEMPO",
   calls: {
@@ -143,8 +146,8 @@ const CLUB = {
       { trigger: "9 as a Forward",  call: "PLUS 1"        },
     ],
   },
-
-
+ 
+ 
   // ── 🔧 TABS ───────────────────────────────────────────────────
   tabs: [
     { id: "gameday",    label: "Game Day",    number: 1, enabled: true  },
@@ -157,8 +160,8 @@ const CLUB = {
     { id: "restarts",   label: "Restarts",    number: 8, enabled: false },
     { id: "opposition", label: "Opposition",  number: 9, enabled: false },
   ],
-
-
+ 
+ 
   // ── 🔧 PRINCIPLES ─────────────────────────────────────────────
   principles: [
     { letter: "P", title: "Process",  body: "Pre Call early, Know your role. Vary the Picture. Tails in Early to tell Hooker. Check if easier!", tag: "FIRST PRIORITY" },
@@ -168,8 +171,8 @@ const CLUB = {
     { letter: "L", title: "Lift",     body: "Meet the jumper off the floor. Stay close until the end. Full extension throughout.", tag: "STAY CLOSE · CHEST-CHEST" },
     { letter: "F", title: "Finish",   body: "Drive, Sky or Bounce. Finish all aspects with purpose and intent. Ends when the backs have the ball.", tag: "INTENT / GET BIG" },
   ],
-
-
+ 
+ 
   // ── 🔧 SCRUM ──────────────────────────────────────────────────
   scrumPillars: [
     { icon: "⬇", title: "Lower Position",     body: "100% of our scrums — lower position. No exceptions. Dominate the height battle." },
@@ -187,8 +190,8 @@ const CLUB = {
     "Collective Drive — Together",
     "First to Dominate · First to Score",
   ],
-
-
+ 
+ 
   // ── 🔧 MAUL ATTACK ────────────────────────────────────────────
   maul: {
     roles: [
@@ -204,8 +207,9 @@ const CLUB = {
       "Expect the Unexpected · Effect Change & Change the Effect",
     ],
   },
-
+ 
 };
 // ════════════════════════════════════════════════════════════════
 //  END OF CONFIG
 // ════════════════════════════════════════════════════════════════
+ 
