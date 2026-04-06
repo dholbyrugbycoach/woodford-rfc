@@ -20,32 +20,32 @@ const CLUB = {
 
 
   // ── 🔁 MATCH INFO (update every week) ────────────────────────
-  opposition:      "OPPONENT NAME",
+  opposition:      "Bristol RFC",
   matchDate:       "2026-04-12",
-  matchVenue:      "Home",
-  matchNotes:      "",
+  matchVenue:      "Away",
+  matchNotes:      "Bristol like to attack the front of the lineout early — watch their T position.",
 
 
   // ── 🔁 STARTING FORWARDS (update every week) ─────────────────
   starting: [
-    { number: 1,  name: "PLAYER NAME",  position: "Loosehead Prop",    caller: null },
-    { number: 2,  name: "PLAYER NAME",  position: "Hooker",            caller: null },
-    { number: 3,  name: "PLAYER NAME",  position: "Tighthead Prop",    caller: null },
-    { number: 4,  name: "PLAYER NAME",  position: "Lock",              caller: "A", callerColor: "gold" },
-    { number: 5,  name: "PLAYER NAME",  position: "Lock",              caller: null },
-    { number: 6,  name: "PLAYER NAME",  position: "Blindside Flanker", caller: null },
-    { number: 7,  name: "PLAYER NAME",  position: "Openside Flanker",  caller: "B", callerColor: "green" },
-    { number: 8,  name: "PLAYER NAME",  position: "Number 8",          caller: null },
+    { number: 1,  name: "TOM HARRIS",    position: "Loosehead Prop",    caller: null },
+    { number: 2,  name: "JAMES KELLY",   position: "Hooker",            caller: "A", callerColor: "gold" },
+    { number: 3,  name: "RORY FINN",     position: "Tighthead Prop",    caller: null },
+    { number: 4,  name: "SEAN MURPHY",   position: "Lock",              caller: "B", callerColor: "green" },
+    { number: 5,  name: "DAVE O'BRIEN",  position: "Lock",              caller: null },
+    { number: 6,  name: "CIAN WALSH",    position: "Blindside Flanker", caller: null },
+    { number: 7,  name: "PATRICK RYAN",  position: "Openside Flanker",  caller: null },
+    { number: 8,  name: "LUKE DOYLE",    position: "Number 8",          caller: null },
   ],
 
 
   // ── 🔁 BENCH FORWARDS (update every week) ────────────────────
   bench: [
-    { number: 16, name: "PLAYER NAME",  position: "Prop",              caller: null },
-    { number: 17, name: "PLAYER NAME",  position: "Hooker",            caller: null },
-    { number: 18, name: "PLAYER NAME",  position: "Prop",              caller: null },
-    { number: 19, name: "PLAYER NAME",  position: "Second Row",        caller: "C", callerColor: "blue" },
-    { number: 20, name: "PLAYER NAME",  position: "Back Row",          caller: null },
+    { number: 16, name: "CONOR WHITE",   position: "Prop",              caller: null },
+    { number: 17, name: "MARK HUGHES",   position: "Hooker",            caller: null },
+    { number: 18, name: "ALAN SCOTT",    position: "Prop",              caller: null },
+    { number: 19, name: "JACK BRENNAN",  position: "Second Row",        caller: "C", callerColor: "blue" },
+    { number: 20, name: "NIALL DALY",    position: "Back Row",          caller: null },
   ],
 
 
@@ -53,59 +53,59 @@ const CLUB = {
   lineout: {
     sevenMan: {
       starting: {
-        throw:  "HOO",
-        pos:    ["1", "T", "E", "M", "P", "O", "7"],
+        throw:  "KELLY",
+        pos:    ["HARRIS", "MURPHY", "WALSH", "O'BRIEN", "RYAN", "FINN", "DOYLE"],
         jumper: 3,
       },
       cover1: {
-        throw:  "HOO",
-        pos:    ["1", "T", "E", "M", "P", "O", "7"],
+        throw:  "HUGHES",
+        pos:    ["HARRIS", "BRENNAN", "WALSH", "O'BRIEN", "RYAN", "FINN", "DOYLE"],
         jumper: 3,
-        changes: "",
+        changes: "Hughes for Kelly · Brennan for Murphy",
       },
       finishers: {
-        throw:  "HOO",
-        pos:    ["1", "T", "E", "M", "P", "O", "7"],
+        throw:  "WHITE",
+        pos:    ["SCOTT", "MURPHY", "WALSH", "O'BRIEN", "RYAN", "FINN", "DOYLE"],
         jumper: 3,
-        changes: "",
+        changes: "White throws · Scott for Harris",
       },
     },
     sixMan: {
       starting: {
-        throw:  "HOO",
-        pos:    ["1", "T", "E", "M", "P", "6"],
+        throw:  "KELLY",
+        pos:    ["HARRIS", "MURPHY", "WALSH", "O'BRIEN", "RYAN", "FINN"],
         jumper: 3,
       },
       cover1: {
-        throw:  "HOO",
-        pos:    ["1", "T", "E", "M", "P", "6"],
+        throw:  "HUGHES",
+        pos:    ["HARRIS", "BRENNAN", "WALSH", "O'BRIEN", "RYAN", "FINN"],
         jumper: 3,
-        changes: "",
+        changes: "Hughes for Kelly · Brennan for Murphy",
       },
       finishers: {
-        throw:  "HOO",
-        pos:    ["1", "T", "E", "M", "P", "6"],
+        throw:  "WHITE",
+        pos:    ["SCOTT", "MURPHY", "WALSH", "O'BRIEN", "RYAN", "FINN"],
         jumper: 3,
-        changes: "",
+        changes: "White throws · Scott for Harris",
       },
     },
     fiveMan: {
       starting: {
-        throw:  "HOO",
-        pos:    ["1", "T", "E", "M", "5"],
+        throw:  "KELLY",
+        pos:    ["HARRIS", "MURPHY", "WALSH", "O'BRIEN", "RYAN"],
         jumper: 3,
       },
       cover1: {
-        throw:  "HOO",
-        pos:    ["1", "T", "E", "M", "5"],
+        throw:  "HUGHES",
+        pos:    ["HARRIS", "BRENNAN", "WALSH", "O'BRIEN", "RYAN"],
         jumper: 3,
-        changes: "",
+        changes: "Hughes for Kelly · Brennan for Murphy",
       },
       finishers: {
-        throw:  "HOO",
-        pos:    ["1", "T", "E", "M", "5"],
+        throw:  "WHITE",
+        pos:    ["SCOTT", "MURPHY", "WALSH", "O'BRIEN", "RYAN"],
         jumper: 3,
-        changes: "",
+        changes: "White throws · Scott for Harris",
       },
     },
   },
